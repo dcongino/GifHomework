@@ -3,7 +3,7 @@
 var topics = ["spiderman", "wolverine","hulk","thor","captain america","venom","iron man","doctor strange",
                 "thanos","ultron","loki","doctor doom"];
 
-
+//Create a function that will render buttons for all strings in your array
 function makeButtons(){
     $("#buttons-view").empty();
         
@@ -19,27 +19,42 @@ function makeButtons(){
 
 makeButtons();
 
+
 function displayCharacterGif() {
+    $("#gifsView").empty();
     var character = $(this).attr("data-name");
     var queryUrl = "https://api.giphy.com/v1/gifs/search?api_key=9PvFmXs9RQRBa1JEiwAibZTSYDSCmhZD&q=" + character + "&limit=10";
 
     $.ajax({ url: queryUrl, method: "GET" }).then(function(response) {
         console.log(response);
 
+        for (i = 0; i < response.data.length; i++){
+
         var gifDiv = $("<div class='gifStore'>")
 
-        var rating = response.data[0].rating;
-        var displayRating = $("<p>").text("Rating: " + rating);
-        gifDiv.append(displayRating);
-
-        var gifs = response.data[0].images.downsized.url;
+        var gifs = response.data[i].images.fixed_height_still.url;
         var displayGifs = $("<img>").attr("src", gifs);
         gifDiv.append(displayGifs);
 
+        var rating = response.data[i].rating;
+        var displayRating = $("<p>").text("Rating: " + rating);
+        gifDiv.append(displayRating);
+
         $("#gifsView").prepend(gifDiv);
 
-        console.log(gifs);
+        }
+
     });
 }
+
+$("#add-character").on("click", function(event) {
+        event.preventDefault();
+        var addChar = $("#character-input").val().trim();
+        topics.push(addChar);
+
+        makeButtons();
+      
+
+});
 
 $(document).on("click", ".character", displayCharacterGif);
