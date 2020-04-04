@@ -34,7 +34,11 @@ function displayCharacterGif() {
         var gifDiv = $("<div class='gifStore'>")
 
         var gifs = response.data[i].images.fixed_height_still.url;
+        var animateGifs = response.data[i].images.fixed_height_downsampled.url;
         var displayGifs = $("<img>").attr("src", gifs);
+        displayGifs.attr("still-image", gifs);
+        displayGifs.attr("looping-image", animateGifs);
+        displayGifs.attr("state", "still");
         gifDiv.append(displayGifs);
 
         var rating = response.data[i].rating;
@@ -46,7 +50,7 @@ function displayCharacterGif() {
         }
 
     });
-}
+};
 
 // Add button for new character upon click
 
@@ -61,3 +65,18 @@ $("#add-character").on("click", function(event) {
 });
 
 $(document).on("click", ".character", displayCharacterGif);
+
+$(document).on("click", "img", function(){
+    var state = $(this).attr("state");
+
+    if(state === "still"){
+         var animatedUrl = $(this).attr("looping-image");
+        $(this).attr("src", animatedUrl);
+        $(this).attr("state", "animate");
+    } else {
+        var stillUrl = $(this).attr("still-image");
+        $(this).attr("src", stillUrl);
+        $(this).attr("state", "still");
+    }
+   
+});
