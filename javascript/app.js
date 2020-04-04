@@ -19,6 +19,7 @@ function makeButtons(){
 
 makeButtons();
 
+//function to display gifs
 
 function displayCharacterGif() {
     $("#gifsView").empty();
@@ -46,6 +47,8 @@ function displayCharacterGif() {
 
     });
 }
+
+// Add button for new character upon click
 
 $("#add-character").on("click", function(event) {
         event.preventDefault();
