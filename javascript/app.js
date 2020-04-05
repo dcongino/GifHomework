@@ -1,7 +1,7 @@
 //Establish variables
 
-var topics = ["spiderman", "wolverine","hulk","thor","captain america","venom","iron man","doctor strange",
-                "thanos","ultron","loki","doctor doom"];
+var topics = ["Spiderman", "Wolverine","Hulk","Thor","Captain America","Venom","Iron Man","Doctor Strange",
+                "Thanos","Ultron","Loki","Doctor Doom"];
 
 //Create a function that will render buttons for all strings in your array
 function makeButtons(){

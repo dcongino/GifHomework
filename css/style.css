@@ -2,3 +2,7 @@
     float: left;
     margin: 5px; 
 }
+
+body {
+    background-image: url(../background3.png);
+}
